@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: medail-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: medail-api
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8000

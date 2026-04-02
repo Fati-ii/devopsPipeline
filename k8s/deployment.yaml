@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medail-api-deployment
+  labels:
+    app: medail-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: medail-api
+  template:
+    metadata:
+      labels:
+        app: medail-api
+    spec:
+      containers:
+      - name: medail-api
+        image: medail-api:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://host.docker.internal:3306/medailles_olympiques?createDatabaseIfNotExist=true&serverTimezone=UTC
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: ""
